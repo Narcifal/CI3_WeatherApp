@@ -17,5 +17,8 @@ application/logs/*
 !application/logs/.htaccess
 /vendor/
 
+#env
+.env
+
 #macOS
 .DS_Store
