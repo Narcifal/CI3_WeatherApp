@@ -14,6 +14,12 @@
 		"php": ">=5.3.7",
 		"vlucas/phpdotenv": "*"
 	},
+	"autoload": {
+        "classmap": [
+            "application/libraries",
+            "application/models"
+        ]
+    },
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
 	},
