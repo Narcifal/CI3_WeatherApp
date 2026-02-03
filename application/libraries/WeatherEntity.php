@@ -7,8 +7,10 @@ class WeatherEntity
     public $description;
     public $humidity;
     public $cityName;
+    public $createdAt;
     public $errorMessage;
 
+    // Public
     public function __construct(?array $data = null)
     {
         $statusCode = (int) ($data['cod'] ?? 0);
@@ -20,8 +22,7 @@ class WeatherEntity
         }
     }
 
-    // Public
-    public function hasData()
+    public function isValid()
     {
         return $this->errorMessage === null && $this->temperature !== null;
     }
@@ -33,7 +34,13 @@ class WeatherEntity
         $this->humidity = (int) ($data['main']['humidity'] ?? 0);
         $this->description = (string) ($data['weather'][0]['description'] ?? 'no description');
         $this->cityName = (string) ($data['name'] ?? 'Unknown location');
+        $this->createdAt = $this->generateLocalTime((int) ($data['timezone'] ?? 0));
         $this->errorMessage = null;
+    }
+
+    private function generateLocalTime($timezoneOffset)
+    {
+        return gmdate('Y-m-d H:i:s', time() + $timezoneOffset);
     }
 
     private function parseError(?array $data)

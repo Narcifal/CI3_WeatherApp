@@ -22,3 +22,6 @@ application/logs/*
 
 #macOS
 .DS_Store
+
+#VSCode
+.vscode/

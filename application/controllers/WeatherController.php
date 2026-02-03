@@ -12,9 +12,11 @@ class WeatherController extends CI_Controller
 
     public function index()
     {
-        $rawData = $this->Weather->getWeather(42.69, 27.70);
-        $data = ['data' => new WeatherEntity($rawData)];
+        $weather = $this->Weather->getProcessedWeather(42.69, 27.70);
 
-        $this->load->view('WeatherView', $data);
+        $this->load->view('WeatherView', [
+            'data' => $weather['data'],
+            'history' => $weather['history']
+        ]);
     }
 }
